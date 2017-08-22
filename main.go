@@ -65,7 +65,7 @@ import (
 	_ "github.com/blevesearch/bleve/analysis/tokenizer/web"
 	_ "github.com/blevesearch/bleve/analysis/tokenizer/whitespace"
 
-    "github.com/Lupino/tokenizer"
+	"github.com/Lupino/tokenizer"
 
 	// date time parsers
 	_ "github.com/blevesearch/bleve/analysis/datetime/flexible"
@@ -109,9 +109,10 @@ var segoAddr = flag.String("segoAddr", "localhost:3000", "SegoTokenizer address"
 func main() {
 	flag.Parse()
 
-    bleve.Config.DefaultKVStore = goleveldb.Name
-    tokenizer.DefaultSegoTokenizerHost = *segoAddr
+	bleve.Config.DefaultKVStore = goleveldb.Name
+	tokenizer.DefaultSegoTokenizerHost = *segoAddr
 
+	os.MkdirAll(*dataDir, 0755)
 	// walk the data dir and register index names
 	dirEntries, err := ioutil.ReadDir(*dataDir)
 	if err != nil {
