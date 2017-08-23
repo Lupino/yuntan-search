@@ -110,7 +110,7 @@ func main() {
 	flag.Parse()
 
 	bleve.Config.DefaultKVStore = goleveldb.Name
-	tokenizer.DefaultSegoTokenizerHost = *segoAddr
+	tokenizer.SegoTokenizerHost = *segoAddr
 
 	os.MkdirAll(*dataDir, 0755)
 	// walk the data dir and register index names
