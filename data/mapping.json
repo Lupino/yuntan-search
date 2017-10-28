@@ -1,0 +1,32 @@
+{
+  "default_mapping": {
+    "enabled": true,
+    "dynamic": true,
+    "default_analyzer": "cjk"
+  },
+  "type_field": "_type",
+  "default_type": "_default",
+  "default_analyzer": "sego",
+  "default_datetime_parser": "dateTimeOptional",
+  "default_field": "_all",
+  "store_dynamic": true,
+  "index_dynamic": true,
+  "analysis": {
+    "analyzers": {
+      "sego": {
+        "char_filters": [
+          "html"
+        ],
+        "token_filters": [
+          "cjk_bigram",
+          "cjk_width",
+          "possessive_en",
+          "stop_en",
+          "to_lower"
+        ],
+        "tokenizer": "sego",
+        "type": "custom"
+      }
+    }
+  }
+}
