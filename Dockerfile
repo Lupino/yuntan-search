@@ -12,3 +12,9 @@ RUN go get github.com/Lupino/yuntan-search && \
     go get github.com/Lupino/tokenizer/tokenizer
 
 WORKDIR /root
+
+ADD start.sh /root/start.sh
+
+EXPOSE 8095
+
+CMD /root/start.sh
