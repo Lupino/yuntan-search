@@ -1,20 +1,13 @@
-FROM docker.io/phusion/baseimage:0.9.21
-MAINTAINER Li Meng Jun <lmjubuntu@gmail.com>
+FROM golang:1.11-alpine3.8
 
-RUN apt-get update && apt-get install -y git && \
-    curl -o /tmp/go.tar.gz https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz && \
-    tar xvf /tmp/go.tar.gz -C /usr/local
+RUN apk update && apk add git
 
-ENV GOPATH /root/go
-ENV PATH /root/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV GOPATH /go
 
-RUN go get github.com/Lupino/yuntan-search && \
-    go get github.com/Lupino/tokenizer/tokenizer
+RUN go get -v github.com/Lupino/yuntan-search
 
-WORKDIR /root
+FROM alpine:3.8
 
-ADD start.sh /root/start.sh
+COPY --from=0 /go/bin/yuntan-search /usr/bin/yuntan-search
 
-EXPOSE 8095
-
-CMD /root/start.sh
+ENTRYPOINT ["yuntan-search"]
